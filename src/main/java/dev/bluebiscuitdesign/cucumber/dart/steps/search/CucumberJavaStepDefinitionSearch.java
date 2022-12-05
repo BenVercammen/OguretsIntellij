@@ -25,6 +25,10 @@ import com.jetbrains.lang.dart.psi.DartMethodDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.cucumber.CucumberUtil;
 
+/**
+ * Takes care of linking steps in ".feature" files to their matching ".dart" StepDefinitions.
+ * This way we can "ctrl + left mouse click" through the steps.
+ */
 public class CucumberJavaStepDefinitionSearch implements QueryExecutor<PsiReference, ReferencesSearch.SearchParameters> {
   @Override
   public boolean execute(@NotNull final ReferencesSearch.SearchParameters queryParameters,

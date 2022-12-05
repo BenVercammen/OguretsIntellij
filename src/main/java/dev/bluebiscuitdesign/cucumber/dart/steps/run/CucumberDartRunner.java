@@ -4,6 +4,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.configurations.RuntimeConfigurationError;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -12,7 +13,6 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.XDebugProcess;
@@ -22,14 +22,16 @@ import com.intellij.xdebugger.XDebuggerManager;
 import com.jetbrains.lang.dart.analyzer.DartAnalysisServerService;
 import com.jetbrains.lang.dart.ide.runner.DartRunner;
 import com.jetbrains.lang.dart.ide.runner.base.DartRunConfigurationBase;
-import com.jetbrains.lang.dart.ide.runner.server.DartRemoteDebugConfiguration;
 import com.jetbrains.lang.dart.ide.runner.server.vmService.DartVmServiceDebugProcess;
 import com.jetbrains.lang.dart.sdk.DartSdk;
 import com.jetbrains.lang.dart.util.DartUrlResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CucumberDartRunner extends GenericProgramRunner {
+/**
+ * Enables "Run as Dart Ogurets ... "
+ */
+public class CucumberDartRunner extends GenericProgramRunner<RunnerSettings> {
 	private static final Logger LOG = Logger.getInstance(DartRunner.class.getName());
 
 	@NotNull
@@ -40,13 +42,14 @@ public class CucumberDartRunner extends GenericProgramRunner {
 
 	@Override
 	public boolean canRun(final @NotNull String executorId, final @NotNull RunProfile profile) {
-		boolean canRun = DefaultDebugExecutor.EXECUTOR_ID.equals(executorId) &&
-			(profile instanceof CucumberDartRunConfiguration);
+		boolean canRun = /*DefaultDebugExecutor.EXECUTOR_ID.equals(executorId) &&*/
+				(profile instanceof CucumberDartRunConfiguration);
+		// TODO: is always "DartTestRunConfiguration" ??
 		if (canRun) {
-      CucumberDartRunConfiguration p = (CucumberDartRunConfiguration)profile;
-      canRun = !(CucumberDartRunnerParameters.isFlutterDriverExecutable(p.getRunnerParameters()));
-    }
-
+			CucumberDartRunConfiguration p = (CucumberDartRunConfiguration) profile;
+			canRun = !(CucumberDartRunnerParameters.isFlutterDriverExecutable(p.getRunnerParameters()));
+			System.out.println("Can run?? " + executorId + " -- " + profile.getName() + " === " + canRun);
+		}
 		return canRun;
 	}
 
@@ -63,22 +66,20 @@ public class CucumberDartRunner extends GenericProgramRunner {
 
 			final RunProfile runConfig = env.getRunProfile();
 			if (state instanceof CucumberDartRunningTestState && runConfig instanceof DartRunConfigurationBase &&
-				DartAnalysisServerService.getInstance(env.getProject()).serverReadyForRequest()) {
-			  CucumberDartRunnerParameters runParams =  ((CucumberDartRunningTestState)state).myRunnerParameters;
+					DartAnalysisServerService.getInstance(env.getProject()).serverReadyForRequest()) {
+				CucumberDartRunnerParameters runParams = ((CucumberDartRunningTestState) state).myRunnerParameters;
 				String path = runParams.getDartFilePath();
-        if (path == null) {
-          path = runParams.getFilePath();
-        }
+				if (path == null) {
+					path = runParams.getFilePath();
+				}
 				assert path != null; // already checked
 				dasExecutionContextId = DartAnalysisServerService.getInstance(env.getProject()).execution_createContext(path);
-			}
-			else {
+			} else {
 				dasExecutionContextId = null; // remote debug or can't start DAS
 			}
 
 			return doExecuteDartDebug(state, env, dasExecutionContextId);
-		}
-		catch (RuntimeConfigurationError e) {
+		} catch (RuntimeConfigurationError e) {
 			throw new ExecutionException(e);
 		}
 	}
@@ -102,7 +103,7 @@ public class CucumberDartRunner extends GenericProgramRunner {
 		final int observatoryPort;
 
 		if (runConfiguration instanceof CucumberDartRunConfiguration && state instanceof CucumberDartRunningTestState) {
-      CucumberDartRunnerParameters runParams =  ((CucumberDartRunningTestState)state).myRunnerParameters;
+			CucumberDartRunnerParameters runParams = ((CucumberDartRunningTestState) state).myRunnerParameters;
 			contextFileOrDir = runParams.getDartFileOrDirectory();
 
 			final String cwd = runParams.computeProcessWorkingDirectory(env.getProject());

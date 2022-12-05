@@ -36,17 +36,12 @@ plugins {
 
 // https://mvnrepository.com/artifact/org.jetbrains.intellij.plugins
 dependencies {
-    // org.jetbrains.annotations.NotNull etc
+    // annotations, "org.jetbrains.annotations.*" etc
     api("org.jetbrains:annotations:23.0.0")
-    // gherkin, for "gherkin.pickles.*" ...
+    // gherkin, for "gherkin.pickles.*" etc
     api("io.cucumber:gherkin:25.0.2")
-    // cucumber-java plugin
-    // https://plugins.jetbrains.com/plugin/7212-cucumber-for-java/versions
-    // Resolves the plugin ZIP, but we only require a single JAR inside of it,
-    // which won't be loaded in this way...
-    // api("com.intellij:cucumber-java:223.7571.123")
-    // So for now, we download the ZIP and put the JAR manually into our project's "lib" folder
-    api(files("lib/cucumber-java-223.7571.123.jar"))
+    // cucumber-core, for "cucumber.runtime.snippets" etc
+    api("io.cucumber:cucumber-core:2.4.0")
 }
 
 group = properties("pluginGroup")

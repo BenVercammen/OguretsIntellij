@@ -8,8 +8,8 @@ and if it detects Flutter, it will also support Flutter FlutterDriver tests.
 
 ## Features
 
-- Full support for creating and navigating to cucumber steps inside classes
-- Creation of classes that hold the steps
+- Full support for creating and navigating to cucumber steps inside dart classes
+- Creation of dart classes that hold the steps
 - Full run and _debug_ support for Features, Feature folders and Scenarios
 - Full stack trace following for failures
 - Automatic run configuration generation for your IDEA Ogurets Run Configurations

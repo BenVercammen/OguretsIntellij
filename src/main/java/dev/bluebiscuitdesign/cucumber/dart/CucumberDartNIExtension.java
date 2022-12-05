@@ -26,6 +26,10 @@ import org.jetbrains.plugins.cucumber.steps.AbstractStepDefinition;
 
 import java.util.*;
 
+/**
+ * Enables IDEA to "Create step definition" from within a ".feature" file for steps that weren't found
+ * by {@link dev.bluebiscuitdesign.cucumber.dart.steps.search.CucumberJavaStepDefinitionSearch}
+ */
 public class CucumberDartNIExtension extends AbstractCucumberExtension {
   @Override
   public boolean isStepLikeFile(@NotNull PsiElement child, @NotNull PsiElement parent) {

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.main.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.test.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-dart-ogurets-plugin-benvercammen.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OguretsIntellij.iml" filepath="$PROJECT_DIR$/.idea/modules/OguretsIntellij.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OguretsIntellij.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OguretsIntellij.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OguretsIntellij.test.iml" filepath="$PROJECT_DIR$/.idea/modules/OguretsIntellij.test.iml" />
     </modules>
   </component>
 </project>
