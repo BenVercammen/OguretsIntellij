@@ -11,7 +11,7 @@ import static dev.bluebiscuitdesign.cucumber.dart.CucumberDartUtil.isStepDefinit
 public class CucumberJavaImplicitUsageProvider implements ImplicitUsageProvider {
   @Override
   public boolean isImplicitUsage(PsiElement element) {
-    if(element instanceof DartMethodDeclaration) {
+    if (element instanceof DartMethodDeclaration) {
       return isStepDefinition((DartMethodDeclaration)element);
     } else if (element instanceof DartClassDefinition) {
       return isStepDefinitionClass((DartClassDefinition)element);
