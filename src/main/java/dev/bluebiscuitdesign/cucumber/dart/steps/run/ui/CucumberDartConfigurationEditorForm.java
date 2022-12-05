@@ -1,11 +1,6 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package dev.bluebiscuitdesign.cucumber.dart.steps.run.ui;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
-import dev.bluebiscuitdesign.cucumber.dart.steps.run.CucumberDartRunConfiguration;
-import dev.bluebiscuitdesign.cucumber.dart.steps.run.CucumberDartRunnerParameters;
 import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
@@ -20,6 +15,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.jetbrains.lang.dart.DartBundle;
 import com.jetbrains.lang.dart.ide.runner.server.ui.DartCommandLineConfigurationEditorForm;
 import com.jetbrains.lang.dart.util.PubspecYamlUtil;
+import dev.bluebiscuitdesign.cucumber.dart.steps.run.CucumberDartRunConfiguration;
+import dev.bluebiscuitdesign.cucumber.dart.steps.run.CucumberDartRunnerParameters;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -59,8 +56,8 @@ public class CucumberDartConfigurationEditorForm extends SettingsEditor<Cucumber
       DartCommandLineConfigurationEditorForm.initDartFileTextWithBrowse(project, myDartFile);
 
       myDartFile.addBrowseFolderListener(DartBundle.message("choose.dart.directory"), null, project,
-        // Unfortunately, withFileFilter() only works for files, not directories.
-        FileChooserDescriptorFactory.createSingleFolderDescriptor());
+              // Unfortunately, withFileFilter() only works for files, not directories.
+              FileChooserDescriptorFactory.createSingleFolderDescriptor());
       myDartFile.addActionListener(e -> onTestDirChanged(project));
 
       final DocumentListener dirListener = new DocumentListener() {
@@ -82,12 +79,12 @@ public class CucumberDartConfigurationEditorForm extends SettingsEditor<Cucumber
 
       myDirField.getTextField().getDocument().addDocumentListener(dirListener);
       myDirField.addBrowseFolderListener("Choose feature dir", null, project,
-        // Unfortunately, withFileFilter() only works for files, not directories.
-        FileChooserDescriptorFactory.createSingleFolderDescriptor());
+              // Unfortunately, withFileFilter() only works for files, not directories.
+              FileChooserDescriptorFactory.createSingleFolderDescriptor());
 
       myFileField.addBrowseFolderListener("Choose feature file", null, project,
-        // Unfortunately, withFileFilter() only works for files, not directories.
-        FileChooserDescriptorFactory.createSingleFileDescriptor("feature"));
+              // Unfortunately, withFileFilter() only works for files, not directories.
+              FileChooserDescriptorFactory.createSingleFileDescriptor("feature"));
 
       // 'Environment variables' is the widest label, anchored by myTestFileLabel
       myTestFileLabel.setPreferredSize(myEnvironmentVariables.getLabel().getPreferredSize());

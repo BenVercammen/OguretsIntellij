@@ -1,6 +1,7 @@
 <idea-plugin>
-    <id>cogurets</id>
-    <name>Ogurets - Cucumber for Dart - by Blue Biscuit Design</name>
+<!--    <id>ogurets&#45;&#45;cucumber-for-dart&#45;&#45;by-blue-biscuit-design</id>-->
+    <id>be.benvercammen.intellij.plugins.ogurets</id>
+    <name>Ogurets - Cucumber for Dart</name>
     <vendor>Blue Biscuit Design</vendor>
     <description>
         <![CDATA[

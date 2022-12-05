@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.support.unzipTo
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 
@@ -8,10 +7,12 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
+// Make sure to set encoding to UTF-8
 tasks.withType<Test> {
     systemProperty("file.encoding", "UTF-8")
 }
 
+// Make sure to set encoding to UTF-8
 tasks.withType<Javadoc>{
     options.encoding = "UTF-8"
 }
@@ -21,8 +22,6 @@ fun properties(key: String) = project.findProperty(key).toString()
 plugins {
     // Java support
     id("java")
-    // For setting compilation to Java 17
-    // id("java-library")
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.7.21"
     // Gradle IntelliJ Plugin
@@ -43,10 +42,11 @@ dependencies {
     api("io.cucumber:gherkin:25.0.2")
     // cucumber-java plugin
     // https://plugins.jetbrains.com/plugin/7212-cucumber-for-java/versions
-    // Resolves the plugin ZIP, but we only require a single JAR inside of it
+    // Resolves the plugin ZIP, but we only require a single JAR inside of it,
+    // which won't be loaded in this way...
     // api("com.intellij:cucumber-java:223.7571.123")
     // So for now, we download the ZIP and put the JAR manually into our project's "lib" folder
-    api(files("lib/cucumber-java.jar"))
+    api(files("lib/cucumber-java-223.7571.123.jar"))
 }
 
 group = properties("pluginGroup")

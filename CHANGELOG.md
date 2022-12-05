@@ -2,6 +2,10 @@
 
 # dart-ogurets-intellij-plugin Changelog
 
+## [2.0.0]
+- converted project to build using gradle 
+- upgraded minimal compatibility from 2021.3 to 2022.3
+
 ## [1.3.0]
 - support for 213 and fixing issue from user
 

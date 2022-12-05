@@ -1,7 +1,5 @@
 package dev.bluebiscuitdesign.cucumber.dart;
 
-import dev.bluebiscuitdesign.cucumber.dart.steps.DartAnnotatedStepDefinition;
-import dev.bluebiscuitdesign.cucumber.dart.steps.DartStepDefinitionCreator;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.progress.ProgressManager;
@@ -16,6 +14,8 @@ import com.intellij.util.indexing.FileBasedIndex;
 import com.jetbrains.lang.dart.DartFileType;
 import com.jetbrains.lang.dart.psi.DartFile;
 import com.jetbrains.lang.dart.psi.DartMethodDeclaration;
+import dev.bluebiscuitdesign.cucumber.dart.steps.DartAnnotatedStepDefinition;
+import dev.bluebiscuitdesign.cucumber.dart.steps.DartStepDefinitionCreator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.cucumber.BDDFrameworkType;

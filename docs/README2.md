@@ -8,6 +8,26 @@ The steps required to do so can be found at https://plugins.jetbrains.com/docs/i
 
 Please first try to set up a simple sample plugin from scratch before continuing.
 
+### IDEA Project Structure settings
+Since our plugin is built for IDEA version `222+`, `Java 17` is required (more info further down this doc),
+we need to make sure our development IDEA is configured to use `JDK 17` as well:
+ - `File` > `Project Structure` 
+   - `Project Settings`:
+     - `Modules`:
+        - Set `Module SDK` to version `17`
+     - `Libraries`:
+       - Make sure the following libraries are present:
+         - `Gradle: io.cucumber:gherkin:*.*.*`
+         - `Gradle: io.cucumber:messages:*.*.*`
+         - `Gradle: org.jetbrains:annotations:*.*.*`
+         - `Gradle: unzipped.com.jetbrains.plugins:Dart:unzipped.com.jetbrains.plugins:*.*.*`
+         - `Gradle: unzipped.com.jetbrains.plugins:gherkin:unzipped.com.jetbrains.plugins:*.*.*`
+       - If the latter 2 aren't present, reload the Gradle project in your IDE
+   - `Platform settings`
+     - `SDKs`
+        - Set `IntelliJ IDEA IU-22.*.*` > `Internal Java Platform` to version `17`
+
+
 ## Build and test using Gradle and Kotlin
 This seems to be the preferred way for IntelliJ plugin development, so we just go with the flow.
 We started from the [GitHub template](https://plugins.jetbrains.com/docs/intellij/plugin-github-template.html) 
@@ -47,7 +67,31 @@ This is configured in `gradle.properties`
 platformPlugins = gherkin:223.7571.113, dart:223.7571.203
 ```
 
+Please note that the 2 dependencies from `platformPlugins` will also result in the defined classes to be included as dependencies in our project.
+If you don't add them there, you would have to add them manually in the `build.gradle.kts` file, like this:
+```.kts
+  ...
+  dependencies {
+    ...
+    // https://plugins.jetbrains.com/plugin/6351-dart/versions
+    api(files("lib/Dart-223.7571.203.jar"))
+    // https://plugins.jetbrains.com/plugin/9164-gherkin/versions
+    api(files("lib/gherkin-223.7571.113.jar"))
+    ...
+  }
+  ...
+```
 When set up correctly, these plugins are also downloaded and enabled when running the `Run Plugin` Gradle run configuration.
 
+However, when you do define them in your `build.gradle.kts` depdencies, then you'll get `LinkageError`s because they are loaded by two different classloaders:
+ - `PluginClassLoader` (because of plugin dependency)
+ - `PathClassLoader` (because `build.gradle.kts` dependency)
+
 Important to note here is that the versions of the plugins should be compatible, but you'll notice that soon enough when running the plugin.
+
+
+
+## Releasing plugin
+ - environment variables:
+   - `PUBLISH_TOKEN`
 
