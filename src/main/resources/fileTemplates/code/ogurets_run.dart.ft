@@ -1,5 +1,5 @@
 import 'package:ogurets/ogurets.dart';
-import 'package:ogurets_flutter/ogurets_flutter.dart';
+
 ${IMPORTS}
 
 // THIS FILE IS GENERATED - it will be overwritten on each run.
@@ -10,12 +10,12 @@ ${IMPORTS}
 // https://github.com/dart-ogurets/Ogurets (for core)
 // https://github.com/dart-ogurets/OguretsFlutter (for ogurets_flutter)
 // https://github.com/dart-ogurets/OguretsIntellij (for the Jetbrains IntelliJ plugin)
+// TODO: remove args, never used and prevents us from running it directly from within IDEA
 void main(args) async {
-  var def = new OguretsOpts()
+  var def = OguretsOpts()
     ..feature('${FLUTTER_TEST}')
-    ..instance(FlutterOgurets())
     ..debug()
-      ${STEPS};
+    ${STEPS};
 
   await def.run();
 }
