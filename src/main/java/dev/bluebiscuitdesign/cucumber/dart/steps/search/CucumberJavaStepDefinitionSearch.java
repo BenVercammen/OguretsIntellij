@@ -13,7 +13,6 @@
 // limitations under the License.
 package dev.bluebiscuitdesign.cucumber.dart.steps.search;
 
-import dev.bluebiscuitdesign.cucumber.dart.CucumberDartUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
@@ -22,6 +21,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.intellij.util.QueryExecutor;
 import com.jetbrains.lang.dart.psi.DartMethodDeclaration;
+import dev.bluebiscuitdesign.cucumber.dart.CucumberDartUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.plugins.cucumber.CucumberUtil;
 
@@ -42,7 +42,6 @@ public class CucumberJavaStepDefinitionSearch implements QueryExecutor<PsiRefere
           DartMethodDeclaration dc = (DartMethodDeclaration)myElement.getParent();
 
           String regexp = CucumberDartUtil.findDartAnnotationText(dc);
-
           if (regexp != null) {
             return CucumberUtil.findGherkinReferencesToElement(myElement, regexp, consumer, queryParameters.getEffectiveSearchScope());
           }
