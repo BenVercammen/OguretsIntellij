@@ -1,6 +1,6 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>cogurets</id>
+    <id>ogurets--cucumber-for-dart</id>
     <name>Ogurets - Cucumber for Dart</name>
     <vendor>Blue Biscuit Design</vendor>
     <description>
